@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .joke.jokecontent{
+            padding: 20px;
+            font-size: 20px;
+        }
+        #button{
+        height: 20px;
+        width: 50px;
+        border: 1px solid black; 
+        cursor: pointer; 
+        color: rgb(14, 14, 15);
+        background-color: rgb(113, 215, 236);
+        border-radius: 10px;
+        
+    }
+    h1{
+        color: aliceblue;
+        text-shadow: 0px 2px 3px black,0px 2px 4px gray;
+    }
+    div{
+        display: flex;
+    }
+    button:hover{
+        transform: scale(1.3);
+    }
+    </style>
+</head>
+<body style="background-image: linear-gradient(aqua,pink,yellow);background-size: cover;">
+    <center>
+    <h1 >Wanna hear something funny?</h1>
+    <button id="button">Yes!</button><br><br>
+    <div id="jokecontent"></div><br>
+    <div id="joke"></div>
+    <img src="joke.jpg" height="200px"width="250px" id="minion" alt="image">
+    <p>😂 Code your own joke generator 😂</p>
+    <div>
+    <img src="tRqTIdl.gif" width="250px"height="250px"></div>
+    </center>
+    <script>
+        const button=document.getElementById("button");
+const joke=document.getElementById("joke");
+const jokecontent=document.getElementById("jokecontent");
+
+button.onclick= () =>{
+    axios.get("https://official-joke-api.appspot.com/random_joke")
+    .then(function(response){
+         button.textContent="Next!";
+         jokecontent.textContent=response.data.setup;
+         joke.textContent="";
+         setTimeout(function(){
+            joke.textContent=response.data.punchline;
+         },5000);
+         
+    })
+    .catch(function(error){
+        console.log("error");
+    });
+}
+    </script>
+    <script src=" https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>
